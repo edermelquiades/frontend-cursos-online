@@ -1,0 +1,14 @@
+@import "../../../scss/index.scss";
+
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 65px;
+  height: 100vh;
+  overflow: auto;
+  .center {
+    text-align: left;
+    // justify-content: center;
+    // align-content: center;
+  }
+}
