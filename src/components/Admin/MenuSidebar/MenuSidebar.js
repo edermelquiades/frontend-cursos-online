@@ -21,8 +21,8 @@ function MenuSidebar(props) {
             <span className="nac-text">Inicio</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="/admin/usersDocente">
-          <Link to={"/admin/usersDocente"} className="center">
+        <Menu.Item key="/admin/usersDocentes">
+          <Link to={"/admin/usersDocentes"} className="center">
             <UsergroupDeleteOutlined />
             <span className="nac-text">Usuarios Docente</span>
           </Link>

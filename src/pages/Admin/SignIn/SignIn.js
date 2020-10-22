@@ -36,18 +36,21 @@ export default function SignIn() {
       setSignUpLoading(false);
       notification["warning"]({
         message: "Completa todos los campos ",
+        style: {backgroundColor: '#FADF62'} 
       });
     } else {
       if (!isEmailValid(formData.email)) {
         setSignUpLoading(false);
         notification["warning"]({
           message: "Email invalido",
+          style: {backgroundColor: '#FADF62'} 
         });
         return null;
       } else if (size(formData.password) < 6) {
         setSignUpLoading(false);
         notification["warning"]({
           message: "La contraseña deber tener al menos 6 carácteres",
+          style: {backgroundColor: '#FADF62'} 
         });
         return null;
       }
@@ -57,11 +60,14 @@ export default function SignIn() {
       if (tr === true) {
         notification["error"]({
           message: "No eres administrador, lo siento",
+          style: {backgroundColor: '#FB9382'} 
+          
         });
         setSignUpLoading(false);
       } else if (result.message) {
         notification["error"]({
           message: result.message,
+          style: {backgroundColor: '#FB9382'} 
         });
         setSignUpLoading(false);
       } else {
@@ -71,6 +77,7 @@ export default function SignIn() {
 
         notification["success"]({
           message: "Login correcto",
+          style: {backgroundColor: '#B8FB82'} 
         });
         window.location.href = "/admin";
       }

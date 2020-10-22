@@ -16,10 +16,12 @@ export default function MenuTop(props) {
   const [logoutValid, setLogoutValid] = useState(false)
   
   const logoutUser = () => {
-    logout();
     notification["success"]({
-      message: "Desconectado correctamente"
+      message: "Desconectado correctamente",
+      style: {backgroundColor: '#B8FB82'} 
     })
+    logout();
+    
     setLogoutValid(true)
     
     window.location.reload();

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import AdminSignIn from "../pages/Admin/SignIn/SignIn";
-import { getAccessToken, getRefreshToken } from "../api/auth";
 import MenuSidebar from "../components/Admin/MenuSidebar";
 import MenuTop from "../components/Admin/MenuTop/MenuTop";
 import useAuth from "../hooks/useAuth";
@@ -39,7 +38,7 @@ export default function LayoutAdmin(props) {
           <Content className="layout-admin__content">
             <LoadRoutes routes={routes} />
           </Content>
-          <Footer className="layout-admin__footer">Facci Uleam</Footer>
+          <Footer  className="layout-admin__footer">Facci-Uleam  &copy; Copyright 2020 &copy; </Footer>
         </Layout>
       </Layout>
     );

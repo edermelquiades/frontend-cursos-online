@@ -5,6 +5,7 @@ import LayoutBasic from "../layouts/LayoutBasic";
 // Admin Pages
 import AdminHome from "../pages/Admin";
 import AdminSignIn from "../pages/Admin/SignIn";
+import AdminUsersDocente from "../pages/Admin/UsersDocentes";
 
 // pages
 import Home from "../pages/Home";
@@ -29,8 +30,13 @@ const routes = [
         exact: true,
       },
       {
-        component: Error404
-      }
+        path: "/admin/usersDocentes",
+        component: AdminUsersDocente,
+        exact: true,
+      },
+      {
+        component: Error404,
+      },
     ],
   },
   {
@@ -44,8 +50,8 @@ const routes = [
         exact: true,
       },
       {
-        component: Error404
-      }
+        component: Error404,
+      },
     ],
   },
 ];
