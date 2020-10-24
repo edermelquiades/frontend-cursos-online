@@ -5,8 +5,8 @@ import ListUserDoc from "../../../components/Admin/Users/ListUserDocentes";
 import "./UsersDocentes.scss";
 
 export default function Users() {
-  const [usersActive, setUsersActive] = useState([]);
-  const [usersInactive, setUsersInactive] = useState([]);
+ const [usersActive, setUsersActive] = useState([]);
+  const [usersInactive, setUsersInactive] = useState([]); 
   const token = getAccessToken();
  const [reloadUsers, setReloadUsers] = useState(false)
   

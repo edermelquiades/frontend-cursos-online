@@ -198,3 +198,47 @@ export function registrarDocente(token, data) {
       return err.message;
     });
 }
+
+export function getUserAdmin(token) {
+  const url = `${basePath}/${apiVersion}/users/?role=ADMIN`;
+
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}
+
+export function getUserAdminActive(token, status) {
+  const url = `${basePath}/${apiVersion}/users-active/?active=${status}&role=ADMIN`;
+
+  const params = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  };
+  return fetch(url, params)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => {
+      return err.message;
+    });
+}

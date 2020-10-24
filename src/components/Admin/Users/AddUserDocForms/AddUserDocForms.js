@@ -3,7 +3,7 @@ import { Form, Input, Button, DatePicker, Row, Col, notification } from "antd";
 import { registrarDocente } from "../../../../api/user";
 import { getAccessToken } from "../../../../api/auth";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import {isEmailValid} from "../../../../utils/validation"
+import { isEmailValid } from "../../../../utils/validation";
 import "./AddUserDocForms.scss";
 
 export default function AddUserDocForms(props) {
@@ -14,57 +14,56 @@ export default function AddUserDocForms(props) {
 
   const addUser = (e) => {
     e.preventDefault();
-    if(!userData.name || userData.name === ""){
-        notification["warning"]({
-            message: "Los nombres son requeridos"
-        })
-    }else if(!userData.lastname || userData.lastname === "") {
-        notification["warning"]({
-            message: "Los apellidos son requeridos"
-        })
-
-    }else if (!isEmailValid(userData.email)) {
+    if (!userData.name || userData.name === "") {
+      notification["warning"]({
+        message: "Los nombres son requeridos",
+      });
+    } else if (!userData.lastname || userData.lastname === "") {
+      notification["warning"]({
+        message: "Los apellidos son requeridos",
+      });
+    } else if (!isEmailValid(userData.email)) {
       notification["warning"]({
         message: "Email invalido",
         style: { backgroundColor: "#FADF62" },
       });
       return null;
-    } else if(!userData.email || userData.email === "") {
-        notification["warning"]({
-            message: "El email es requerido"
-        })
-    }else if(!userData.password || userData.password === "" ) {
-        notification["warning"]({
-            message: "El Apellido es requerido"
-        })
-    }else if(userData.password < 6){
-        notification["warning"]({
-            message: "La contraseña debe tener máximo 6 carácteres"
-        })
-    }else if(!userData.birthday || userData.birthday === "" ){
-        notification["warning"]({
-            message: "Debe ingresar su fecha de nacimiento"
-        })
-    }else {
-        const accessToken = getAccessToken();
+    } else if (!userData.email || userData.email === "") {
+      notification["warning"]({
+        message: "El email es requerido",
+      });
+    } else if (!userData.password || userData.password === "") {
+      notification["warning"]({
+        message: "El Apellido es requerido",
+      });
+    } else if (userData.password < 6) {
+      notification["warning"]({
+        message: "La contraseña debe tener máximo 6 carácteres",
+      });
+    } else if (!userData.birthday || userData.birthday === "") {
+      notification["warning"]({
+        message: "Debe ingresar su fecha de nacimiento",
+      });
+    } else {
+      const accessToken = getAccessToken();
 
-        registrarDocente(accessToken, userData)
-        .then(response => {
-            notification["info"]({
-                message: response
-            })
-            setIsVisibleModal(false)
-            setReloadUsers(true);
-            setUserData({})
-            setUserData({role: "DOCENTE"})
-        }).catch(err => {
-            notification["error"]({
-                message: err
+      registrarDocente(accessToken, userData)
+        .then((response) => {
+          notification["info"]({
+            message: response,
+          });
+          setIsVisibleModal(false);
+          setReloadUsers(true);
+          setUserData({});
+          setUserData({ role: "DOCENTE" });
         })
-    });
+        .catch((err) => {
+          notification["error"]({
+            message: err,
+          });
+        });
     }
-};
-  
+  };
 
   return (
     <div className="add-user-form">
@@ -142,9 +141,7 @@ function AddForm(props) {
             <DatePicker
               placeholder="Fecha de Nacimiento: 1997-18-09"
               value={userData.birthday}
-              onChange={(e) =>
-                setUserData({ ...userData, birthday: e })
-              }
+              onChange={(e) => setUserData({ ...userData, birthday: e })}
               style={{ width: "100%" }}
             />
           </Form.Item>
@@ -153,7 +150,7 @@ function AddForm(props) {
         <Col span={12}>
           <Form.Item>
             <Input
-            className="centrar"
+              className="centrar"
               disabled
               value={userData.role}
               onChange={(e) =>

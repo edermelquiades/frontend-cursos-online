@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { UsergroupDeleteOutlined, HomeOutlined } from "@ant-design/icons";
+import {FontColorsOutlined, UsergroupDeleteOutlined, HomeOutlined } from "@ant-design/icons";
 
 import "./MenuSidebar.scss";
 
@@ -25,6 +25,12 @@ function MenuSidebar(props) {
           <Link to={"/admin/usersDocentes"} className="center">
             <UsergroupDeleteOutlined />
             <span className="nac-text">Usuarios Docente</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/admin/usersAdmin">
+          <Link to={"/admin/usersAdmin"} className="center">
+          <FontColorsOutlined />
+            <span className="nac-text">Usuarios Admin</span>
           </Link>
         </Menu.Item>
       </Menu>

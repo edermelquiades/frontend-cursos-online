@@ -1,4 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import NoAvatar from "../../../../assets/img/png/no-avatar.png";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Form,
@@ -9,9 +12,6 @@ import {
   Col,
   notification,
 } from "antd";
-import { useDropzone } from "react-dropzone";
-import NoAvatar from "../../../../assets/img/png/no-avatar.png";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import {
   getAvatarApi,
   uploadAvatarApi,
@@ -21,14 +21,13 @@ import {
 import { getAccessToken } from "../../../../api/auth";
 import { isEmailValid } from "../../../../utils/validation";
 
-import "./EditUserForm.scss";
+import "./EditUserAdmin.scss";
 
-export default function EditUserForm(props) {
+export default function EditUserAdmin(props) {
   const { user, setIsVisibleModal, setReloadUsers } = props;
 
   const [avatar, setAvatar] = useState(null);
   const [userData, setUserData] = useState({});
-
   useEffect(() => {
     setUserData({
       name: user.name,
@@ -73,16 +72,18 @@ export default function EditUserForm(props) {
         delete userUpdate.repeatPassword;
       }
     }
-    if (!userUpdate.name || userUpdate.name === "") {
+    if (!userUpdate.name || userUpdate.name ==="") {
       notification["warning"]({
         message: "El nombre  es obligatorio",
         style: { backgroundColor: "#FADF62" },
       });
+      return null
     } else if (!userUpdate.lastname || userUpdate.lastname === "") {
       notification["warning"]({
         message: "Los Apellidos son  obligatorios",
         style: { backgroundColor: "#FADF62" },
       });
+      return null
     } else if (!isEmailValid(userUpdate.email)) {
       notification["warning"]({
         message: "Email invalido",
@@ -93,6 +94,7 @@ export default function EditUserForm(props) {
       notification["error"]({
         message: "El email es obligatorio",
       });
+      return null
     }
     if (typeof userUpdate.avatar === "object") {
       uploadAvatarApi(token, userUpdate.avatar, user._id).then((response) => {
@@ -113,7 +115,7 @@ export default function EditUserForm(props) {
           style: { backgroundColor: "#B8FB82" },
         });
       });
-      console.log(userUpdate);
+      
       setIsVisibleModal(false);
       setReloadUsers(true);
     }
@@ -121,11 +123,10 @@ export default function EditUserForm(props) {
   const onChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-
   return (
-    <div className="edit-user-form">
+    <div className="edit-user-admin">
       <UploadAvatar avatar={avatar} setAvatar={setAvatar} />
-      <EditForm
+      <EditFormAdmin
         userData={userData}
         setUserData={setUserData}
         updateUser={updateUser}
@@ -176,7 +177,7 @@ function UploadAvatar(props) {
   );
 }
 
-function EditForm(props) {
+function EditFormAdmin(props) {
   const { userData, setUserData, updateUser, onChange } = props;
   const { Option } = Select;
 
