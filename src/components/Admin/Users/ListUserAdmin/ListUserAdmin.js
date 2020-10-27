@@ -15,6 +15,7 @@ import {
   CheckOutlined,
   UserAddOutlined
 } from "@ant-design/icons";
+import Pagination from "../../../Pagination";
 import {
   getAvatarApi,
   activateUserApi,
@@ -30,7 +31,7 @@ import AddUserAdmin from "../AddUserAdmin";
 
 const { confirm } = ModalAntd;
 export default function ListUserAdmin(props) {
-  const { userAdminActive, userAdminInactive, setReloadUsers } = props;
+  const { location, history, userAdminActive, userAdminInactive, setReloadUsers } = props;
   const [viewUserActives, setviewUserActives] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState([]);
@@ -56,7 +57,7 @@ export default function ListUserAdmin(props) {
             {viewUserActives ? "Usuarios Activos" : "Usuarios Inactivos"}
           </span>
         </div>
-        <Button className="boton" type="primary" onClick={addUserModal}>
+        <Button className="boton animate__animated animate__slideInRight" type="primary" onClick={addUserModal}>
         <UserAddOutlined />  Nuevo Usuario
         </Button>
       </div>
@@ -74,6 +75,14 @@ export default function ListUserAdmin(props) {
           userAdminInactive={userAdminInactive}
         />
       )}
+       <Pagination 
+           location={location}
+           history={history}
+            usersActive={userAdminActive}
+            usersInactive={userAdminInactive}
+            viewUserActives={viewUserActives}
+            className="pagination"
+          />
       <Modal
         title={modalTitle}
         isVisible={isVisibleModal}
@@ -104,17 +113,21 @@ function UsersActiveAdmin(props) {
       />
     );
   };
+  
   return (
     <List
       className="users-active-admin"
       itemLayout="horizontal"
-      dataSource={userAdminActive}
+      dataSource={userAdminActive.docs}
+      // loading={!userAdminActive }
       renderItem={(user) => (
+         
         <UserActiveAdmin
           editUserAd={editUserAd}
           user={user}
           setReloadUsers={setReloadUsers}
-        />
+        /> 
+        
       )}
     />
   );
@@ -228,7 +241,7 @@ function UsersInactiveAdmin(props) {
     <List
       className="users-active-admin"
       itemLayout="horizontal"
-      dataSource={userAdminInactive}
+      dataSource={userAdminInactive.docs}
       renderItem={(user) => (
         <UserInactiveAdmin user={user} setReloadUsers={setReloadUsers} />
       )}

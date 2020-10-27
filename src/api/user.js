@@ -46,8 +46,9 @@ export function getUserDocentes(token) {
     });
 }
 
-export function getUserDocentesActive(token, status) {
-  const url = `${basePath}/${apiVersion}/users-active/?active=${status}&role=DOCENTE`;
+export function getUserDocentesActive(token, status, page, limit) {
+  const url = `${basePath}/${apiVersion}/users-active?active=${status}&role=DOCENTE&limit=${limit}&page=${page}`;
+  // http://localhost:2002/api/v1/users-active?active=true&role=DOCENTE&skip=1&limit=5
 
   const params = {
     method: "GET",
@@ -221,8 +222,8 @@ export function getUserAdmin(token) {
     });
 }
 
-export function getUserAdminActive(token, status) {
-  const url = `${basePath}/${apiVersion}/users-active/?active=${status}&role=ADMIN`;
+export function getUserAdminActive(token, status, page, limit) {
+  const url = `${basePath}/${apiVersion}/users-active/?active=${status}&role=ADMIN&limit=${limit}&page=${page}`;
 
   const params = {
     method: "GET",

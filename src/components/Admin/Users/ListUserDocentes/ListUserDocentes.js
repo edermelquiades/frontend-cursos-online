@@ -6,6 +6,7 @@ import {
   Button,
   notification,
   Modal as ModalAntd,
+ 
 } from "antd";
 import NoAvatar from "../../../../assets/img/png/no-avatar.png";
 import {
@@ -21,31 +22,37 @@ import {
   activateUserApi,
   deleteUserApi,
 } from "../../../../api/user";
+import Pagination from "../../../Pagination";
 import AddUserDocente from "../AddUserDocForms";
-import {UserAddOutlined} from "@ant-design/icons";
+import { UserAddOutlined } from "@ant-design/icons";
 import { getAccessToken } from "../../../../api/auth";
 import "./ListUserDocentes.scss";
+
 const { confirm } = ModalAntd;
 
 export default function ListUserDocentes(props) {
-  const { usersActive, usersInactive, setReloadUsers } = props;
+  const {location, history, usersActive, usersInactive, setReloadUsers} = props;
   const [viewUserActives, setviewUserActives] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState([]);
   const [modalContent, setModalContent] = useState(null);
 
+
+  
   const addUserModal = () => {
-   setIsVisibleModal(true);
-   setModalTitle("Creando Nuevo Usuario");
-   setModalContent(
-     <AddUserDocente setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers}/>
-   )
-  }
+    setIsVisibleModal(true);
+    setModalTitle("Creando Nuevo Usuario");
+    setModalContent(
+      <AddUserDocente
+        setIsVisibleModal={setIsVisibleModal}
+        setReloadUsers={setReloadUsers}
+      />
+    );
+  };
 
   return (
     <div className="list-users">
       <div className="list-users__header">
-
         <div className="list-users__header-switch">
           <Switch
             defaultChecked
@@ -55,8 +62,12 @@ export default function ListUserDocentes(props) {
             {viewUserActives ? "Usuarios Activos" : "Usuarios Inactivos"}
           </span>
         </div>
-        <Button className="boton" type="primary" onClick={addUserModal}>
-        <UserAddOutlined />  Nuevo Usuario
+        <Button
+          className="boton animate__animated animate__slideInRight"
+          type="primary"
+          onClick={addUserModal}
+        >
+          <UserAddOutlined /> Nuevo Usuario
         </Button>
       </div>
       {viewUserActives ? (
@@ -73,6 +84,13 @@ export default function ListUserDocentes(props) {
           usersInactive={usersInactive}
         />
       )}
+     <Pagination 
+           location={location}
+           history={history}
+            usersActive={usersActive}
+            usersInactive={usersInactive}
+            viewUserActives={viewUserActives}
+          />
       <Modal
         title={modalTitle}
         isVisible={isVisibleModal}
@@ -105,10 +123,11 @@ function UsersActive(props) {
   };
   return (
     <List
-      className="users-active"
+      className="users-active animate__animated animate__slideInUp"
       itemLayout="horizontal"
-      dataSource={usersActive}
+      dataSource={usersActive.docs}
       renderItem={(user) => (
+
         <UserActive
           user={user}
           editUserDoc={editUserDoc}
@@ -178,8 +197,12 @@ function UserActive(props) {
   return (
     <List.Item
       actions={[
-        <Button type="primary" onClick={() => editUserDoc(user)}>
-          <EditOutlined />
+        <Button
+          className="botonw"
+          type="primary"
+          onClick={() => editUserDoc(user)}
+        >
+          <EditOutlined className="icono" />
         </Button>,
         <Button
           type="danger"
@@ -209,9 +232,9 @@ function UsersInactive(props) {
   const { usersInactive, setReloadUsers } = props;
   return (
     <List
-      className="users-active"
+      className="users-active animate__animated animate__slideInUp"
       itemLayout="horizontal"
-      dataSource={usersInactive}
+      dataSource={usersInactive.docs}
       renderItem={(user) => (
         <UserInactive setReloadUsers={setReloadUsers} user={user} />
       )}

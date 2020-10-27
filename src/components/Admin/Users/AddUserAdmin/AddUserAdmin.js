@@ -46,12 +46,13 @@ export default function AddUserAdmin(props) {
           });
         } else {
           const accessToken = getAccessToken();
-    
+          
           registrarDocente(accessToken, userData)
             .then((response) => {
               notification["info"]({
                 message: response,
               });
+              // activeEmail(accessToken, userData)
               setIsVisibleModal(false);
               setReloadUsers(true);
               setUserData({});
@@ -77,7 +78,10 @@ export default function AddUserAdmin(props) {
 }
 function AddForm(props) {
     const { userData, setUserData, addUser } = props;
-  
+    
+    const enviarEmail = (e) => {
+        
+    }
     return (
       <Form className="form-add" onSubmitCapture={addUser}>
         <Row gutter={24}>

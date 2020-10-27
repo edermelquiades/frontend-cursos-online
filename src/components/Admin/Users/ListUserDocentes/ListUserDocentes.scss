@@ -4,22 +4,21 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-   
-    .boton{
-     margin-right: 3px;
-     border-radius: 14px;
+
+    .boton {
+      margin-right: 3px;
+      border-radius: 14px;
     }
     &-switch {
-        display: flex;
-        align-items: center;
-        margin-bottom: 50px;
-    
-        > button {
-          margin-right: 20px;
-        }
+      display: flex;
+      align-items: center;
+      margin-bottom: 50px;
+
+      > button {
+        margin-right: 20px;
       }
+    }
   }
- 
 
   .users-active {
     background-color: #fff;
@@ -32,3 +31,30 @@
     }
   }
 }
+
+@media screen and (min-width: 300px) {
+  .list-users {
+    
+   
+
+      .boton {
+        margin-right: 3px;
+        border-radius: 14px;
+        //  width: 130px;
+        margin-top: 50px;
+      }
+      &-switch {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+        width: 20px;
+
+        > button {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    
+  }
+
