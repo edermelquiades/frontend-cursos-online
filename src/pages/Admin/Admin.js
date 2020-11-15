@@ -4,7 +4,7 @@ import { ArrowUpOutlined } from "@ant-design/icons";
 import { getAccessToken } from "../../api/auth";
 import { getUserAdminActive, getUserDocentesActive } from "../../api/user";
 import nube from "../../assets/img/png/nube.png";
-import { Bar, Radar, Pie, Line, Doughnut } from "react-chartjs-2";
+import { Pie, Doughnut } from "react-chartjs-2";
 import JwtDecode from "jwt-decode";
 
 import "./Admin.scss";
@@ -18,19 +18,19 @@ export default function Admin() {
   const token = getAccessToken();
 
   const user = JwtDecode(token);
-  
+
   useEffect(() => {
-    getUserAdminActive(token, true).then(response => {
+    getUserAdminActive(token, true).then((response) => {
       setUserAdminActive(response.user);
     });
-    getUserAdminActive(token, false).then(response => {
+    getUserAdminActive(token, false).then((response) => {
       setUserAdminInactive(response.user);
-        // setReloadUsers(false)
+      // setReloadUsers(false)
     });
-    getUserDocentesActive(token, true).then(response => {
+    getUserDocentesActive(token, true).then((response) => {
       setUsersActive(response.user);
     });
-    getUserDocentesActive(token, false).then(response => {
+    getUserDocentesActive(token, false).then((response) => {
       setUsersInactive(response.user);
     });
   }, [token]);
@@ -39,7 +39,7 @@ export default function Admin() {
   const inactive = userAdminInactive.total;
   const activeDocente = usersActive.total;
   const InactiveDocente = usersInactive.total;
-  const userAdmin =  active + inactive;
+  const userAdmin = active + inactive;
   const userDocente = activeDocente + InactiveDocente;
   const data = {
     labels: ["Admin Activo", "Admin Inactivo"],
@@ -61,20 +61,25 @@ export default function Admin() {
       },
     ],
   };
-  
+
   return (
     <div className="site-statistic-demo-card ">
-      
       <div className="User">
-        <h1 className="Bienvenido animate__animated animate__slideInLeft"> Bienvenido </h1>{" "}
-        <h1 className="Nombre animate__animated animate__slideInLeft"> {`${user.name} ${user.lastname}`} </h1>
+        <h1 className="Bienvenido animate__animated animate__slideInLeft">
+          {" "}
+          Bienvenido{" "}
+        </h1>{" "}
+        <h1 className="Nombre animate__animated animate__slideInLeft">
+          {" "}
+          {`${user.name} ${user.lastname}`}{" "}
+        </h1>
       </div>
       <Row gutter={16} className="center">
         <Col span={6} className="spaci">
           <Card className="card-admin animate__animated animate__fadeInTopLeft">
             <img className="foto" src={nube} alt="" />
             <Statistic
-            className="static"
+              className="static"
               title="Usuarios Administrador"
               value={userAdmin}
               // precision={2}

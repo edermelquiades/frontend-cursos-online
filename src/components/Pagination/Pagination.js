@@ -14,7 +14,7 @@ export default function Pagination(props) {
   // console.log(usersActive.limit)
   let currentPage = parseInt(usersActive.page);
 //   currentPage = 1;
-console.log(currentPage)
+
   let currentPage2 = parseInt(usersInactive.page);
   //  currentPage2 = 1;
   const total = usersActive.pages;

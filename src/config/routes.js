@@ -9,9 +9,16 @@ import AdminUsersDocente from "../pages/Admin/UsersDocentes";
 import UserAdmin from "../pages/Admin/UsersAdmin";
 // pages
 import Home from "../pages/Home";
+import Contact from "../pages/Contact";
+import LoginWeb from "../pages/Web/SignSignOut";
+import Profile from "../pages/Web/Profile";
+// PANEL
+import Panel from "../pages/Web/PanelVideo";
+import AddCourses from "../components/WebPanel/Courses/AddCourses";
 
 // Other
 import Error404 from "../pages/Error404";
+import LayoutPanel from "../layouts/LayoutPanel";
 
 const routes = [
   {
@@ -33,9 +40,30 @@ const routes = [
         path: "/admin/usersDocentes",
         component: AdminUsersDocente,
         exact: true,
-      },{
+      },
+      {
         path: "/admin/usersAdmin",
         component: UserAdmin,
+        exact: true,
+      },
+      {
+        component: Error404,
+      },
+    ],
+  },
+  {
+    path: "/panel",
+    component: LayoutPanel,
+    exact: false,
+    routes: [
+      {
+        path: "/panel",
+        component: Panel,
+        exact: true,
+      },
+      {
+        path: "/panel/cursos",
+        component: AddCourses,
         exact: true,
       },
       {
@@ -51,6 +79,21 @@ const routes = [
       {
         path: "/",
         component: Home,
+        exact: true,
+      },
+      {
+        path: "/contact",
+        component: Contact,
+        exact: true,
+      },
+      {
+        path: "/login",
+        component: LoginWeb,
+        exact: true,
+      },
+      {
+        path: "/profile/:id",
+        component: Profile,
         exact: true,
       },
       {

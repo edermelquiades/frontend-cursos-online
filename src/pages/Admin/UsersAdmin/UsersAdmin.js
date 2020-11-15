@@ -18,7 +18,7 @@ function UsersAdmin(props) {
   
   useEffect(() => {
     getUserAdminActive(token, true, page, 5).then(response => {
-      console.log(response.user)
+      
       setUserAdminActive(response.user);
     });
     getUserAdminActive(token, false, page, 5).then(response => {
